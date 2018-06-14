@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1">
+    tools:context="br.ufg.com.dedoduro.ListaDeObras"
+    >
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar_lista"
@@ -16,7 +18,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        >
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -25,7 +28,8 @@
             android:layout_gravity="center"
             android:text="Lista de Obras"
             android:textColor="@android:color/white"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            />
 
     </android.support.v7.widget.Toolbar>
 
@@ -34,10 +38,14 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_gravity="end|bottom"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="44dp"
         android:src="@drawable/fb"
-        app:backgroundTint="@color/colorPrimary" />
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
