@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Dedo Duro</string>
+    <string name="hint_email">Email</string>
+    <string name="button_forgot_password">Esqueceu a senha?</string>
+    <string name="label_enter">Entrar</string>
+    <string name="hint_password">Senha</string>
+    <string name="error_connection">Você não tem conexão.</string>
+    <string name="label_wait">Aguarde</string>
+    <string name="label_login">LOGIN</string>
+    <string name="label_register_user">REGISTRO DE USUÁRIO</string>
+    <string name="button_register">Registrar-se</string>
 </resources>
