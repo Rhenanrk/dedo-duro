@@ -7,38 +7,38 @@
     android:layout_height="match_parent"
     tools:context="br.ufg.com.dedoduro.auth.RegisterActivity">
 
-    <!--barra superior-->
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    <!--&lt;!&ndash;barra superior&ndash;&gt;-->
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/my_toolbar"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
 
-        <ImageView
-            android:id="@+id/button_back"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@null"
-            android:src="@drawable/ic_arrow_back_black_24dp"
-            android:tint="@android:color/white" />
+        <!--<ImageView-->
+            <!--android:id="@+id/button_back"-->
+            <!--android:layout_width="32dp"-->
+            <!--android:layout_height="32dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:background="@null"-->
+            <!--android:src="@drawable/ic_arrow_back_black_24dp"-->
+            <!--android:tint="@android:color/white" />-->
 
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/label_register_user"
-            android:textColor="@android:color/white"
-            android:textSize="20dp" />
-    </android.support.v7.widget.Toolbar>
+        <!--<TextView-->
+            <!--android:id="@+id/toolbar_title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="@string/label_register_user"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="20dp" />-->
+    <!--</android.support.v7.widget.Toolbar>-->
 
     <!--campo de email-->
     <EditText
@@ -47,12 +47,12 @@
         android:layout_height="45dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="212dp"
         android:hint="@string/hint_email"
         android:inputType="textEmailAddress"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--campo de senha-->
     <EditText
@@ -61,7 +61,7 @@
         android:layout_height="45dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -75,7 +75,7 @@
         android:layout_height="48dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
         android:text="@string/button_register"
         android:textColor="@android:color/white"

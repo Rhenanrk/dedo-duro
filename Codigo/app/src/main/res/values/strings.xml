@@ -9,4 +9,6 @@
     <string name="label_login">LOGIN</string>
     <string name="label_register_user">Registro de usuário</string>
     <string name="button_register">Registrar-se</string>
+    <string name="pergunta_conta">Não possui uma conta?</string>
+    <string name="registre_se">Registre-se!</string>
 </resources>

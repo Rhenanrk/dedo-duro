@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -24,8 +23,6 @@ import org.greenrobot.eventbus.Subscribe;
 import br.ufg.com.dedoduro.R;
 import br.ufg.com.dedoduro.model.HomeActivity;
 import br.ufg.com.dedoduro.web.Connection;
-import br.ufg.com.dedoduro.web.WebError;
-import br.ufg.com.dedoduro.web.WebTaskLogin;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         setupLogin();
-        callRegister();
+        setupRegister();
     }
 
     @Override
@@ -105,30 +102,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void alert(String msg) {
-        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT)
-                .show();
-    }
+    private void setupRegister() {
+        TextView textRegister =
+                (TextView) findViewById(R.id.textView_registre_se);
 
-
-    private void sendCredentials(String email, String pass) {
-        WebTaskLogin taskLogin = new WebTaskLogin(this,
-                email, pass);
-        taskLogin.execute();
-    }
-
-    private void showLoading() {
-        dialog = new MaterialDialog.Builder(this)
-                .content(R.string.label_wait)
-                .progress(true, 0)
-                .cancelable(false)
-                .show();
-    }
-
-    private void callRegister() {
-        Button buttonRegister =
-                (Button) findViewById(R.id.button_register_new);
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
+        textRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
@@ -146,12 +124,17 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(openUrlIntent);
     }
 
-    @Subscribe
-    public void onEvent(WebError error) {
-        hideLoading();
-        Snackbar.make(findViewById(R.id.container),
-                error.getMessage(),
-                Snackbar.LENGTH_LONG).show();
+    private void alert(String msg) {
+        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    private void showLoading() {
+        dialog = new MaterialDialog.Builder(this)
+                .content(R.string.label_wait)
+                .progress(true, 0)
+                .cancelable(false)
+                .show();
     }
 
     private void hideLoading() {

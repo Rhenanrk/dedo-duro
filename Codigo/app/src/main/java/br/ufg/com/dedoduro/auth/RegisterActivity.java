@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,15 +32,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanveState) {
         super.onCreate(saveInstanveState);
         setContentView(R.layout.activity_register);
-
-        ImageView buttonBack = (ImageView) findViewById(R.id.button_back);
-
-        buttonBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
         setupRegister();
     }
