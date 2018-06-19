@@ -7,41 +7,6 @@
     tools:context="br.ufg.com.dedoduro.model.HomeActivity"
     >
 
-
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/my_toolbar_lista"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
-        <!--&gt;-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/button_logout"-->
-            <!--android:layout_width="32dp"-->
-            <!--android:layout_height="32dp"-->
-            <!--android:layout_alignParentRight="false"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:background="@null"-->
-            <!--android:src="@drawable/ic_shutdown_24" />-->
-
-        <!--<TextView-->
-            <!--android:id="@+id/toolbar_title"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="Lista de Obras"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:textSize="20dp"-->
-            <!--/>-->
-
-    <!--</android.support.v7.widget.Toolbar>-->
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="56dp"
