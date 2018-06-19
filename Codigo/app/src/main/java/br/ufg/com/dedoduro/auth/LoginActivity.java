@@ -3,24 +3,34 @@ package br.ufg.com.dedoduro.auth;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import br.ufg.com.dedoduro.R;
+import br.ufg.com.dedoduro.model.HomeActivity;
+import br.ufg.com.dedoduro.web.Connection;
 import br.ufg.com.dedoduro.web.WebError;
 import br.ufg.com.dedoduro.web.WebTaskLogin;
 
 public class LoginActivity extends AppCompatActivity {
 
     MaterialDialog dialog;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +39,12 @@ public class LoginActivity extends AppCompatActivity {
 
         setupLogin();
         callRegister();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        auth = Connection.getFirebaseAuth();
     }
 
     @Override
@@ -61,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         if (!"".equals(editTextEmail.getText().toString())) {
             if (!"".equals(editTextPassword.getText().toString())) {
                 showLoading();
-                sendCredentials(editTextEmail.getText().toString(),
+                performLogin(editTextEmail.getText().toString(),
                         editTextPassword.getText().toString());
             } else {
                 editTextPassword.setError("Preencha o campo senha");
@@ -70,6 +86,30 @@ public class LoginActivity extends AppCompatActivity {
             editTextEmail.setError("Preencha o campo email");
         }
     }
+
+    private void performLogin(String email, String pass) {
+        auth.signInWithEmailAndPassword(email, pass)
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Intent intentLogin = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(intentLogin);
+                            hideLoading();
+                        } else {
+                            hideLoading();
+                            alert("Erro ao relaizar login");
+                        }
+                    }
+                });
+
+    }
+
+    private void alert(String msg) {
+        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT)
+                .show();
+    }
+
 
     private void sendCredentials(String email, String pass) {
         WebTaskLogin taskLogin = new WebTaskLogin(this,

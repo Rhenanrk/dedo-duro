@@ -7,6 +7,6 @@
     <string name="error_connection">Você não tem conexão.</string>
     <string name="label_wait">Aguarde</string>
     <string name="label_login">LOGIN</string>
-    <string name="label_register_user">REGISTRO DE USUÁRIO</string>
+    <string name="label_register_user">Registro de usuário</string>
     <string name="button_register">Registrar-se</string>
 </resources>
