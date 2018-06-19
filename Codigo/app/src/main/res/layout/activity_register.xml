@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context="br.ufg.com.dedoduro.auth.RegisterActivity">
 
+    <!--toolBar-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/register_toolbar"
+        app:title="@string/title_register_user"
+        app:titleTextColor="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:theme="@style/ToolbarStyle"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <!--campo de email-->
     <EditText
         android:id="@+id/input_new_email"

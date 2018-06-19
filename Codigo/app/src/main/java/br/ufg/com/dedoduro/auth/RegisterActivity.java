@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,9 +33,13 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanveState) {
         super.onCreate(saveInstanveState);
         setContentView(R.layout.activity_register);
-        setTitle("Registro de Usuário");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.register_toolbar);
+        setSupportActionBar(myToolbar);
 
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
         setupRegister();
     }
 
@@ -45,9 +50,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
-        finish();
-        return true;
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupRegister() {

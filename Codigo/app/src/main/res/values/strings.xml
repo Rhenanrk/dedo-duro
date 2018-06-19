@@ -7,8 +7,10 @@
     <string name="error_connection">Você não tem conexão.</string>
     <string name="label_wait">Aguarde</string>
     <string name="label_login">LOGIN</string>
-    <string name="label_register_user">Registro de usuário</string>
+    <string name="title_register_user">Registro de Usuário</string>
     <string name="button_register">Registrar-se</string>
     <string name="pergunta_conta">Não possui uma conta?</string>
     <string name="registre_se">Registre-se!</string>
+    <string name="title_obra">Obra Paralizada</string>
+    <string name="title_nova_obra">Nova Obra</string>
 </resources>

@@ -5,4 +5,5 @@
     <color name="colorAccent">#000000</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorLightGrey">#969696</color>
+    <color name="colorTextImput">#673ab6</color>
 </resources>

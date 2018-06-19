@@ -7,8 +7,20 @@
     tools:context="br.ufg.com.dedoduro.model.HomeActivity"
     >
 
+    <!--toolBar-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/home_toolbar"
+        app:title="@string/title_obra"
+        app:titleTextColor="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:theme="@style/ToolbarStyle"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab_button"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_gravity="end|bottom"
@@ -24,9 +36,7 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="8dp" />
