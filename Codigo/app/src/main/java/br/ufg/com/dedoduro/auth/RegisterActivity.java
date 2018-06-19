@@ -32,6 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanveState) {
         super.onCreate(saveInstanveState);
         setContentView(R.layout.activity_register);
+        setTitle("Registro de Usuário");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setupRegister();
     }
@@ -40,6 +42,12 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         auth = Connection.getFirebaseAuth();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
     private void setupRegister() {
