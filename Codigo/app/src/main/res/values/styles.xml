@@ -13,10 +13,8 @@
     </style>
 
     <style name="TextLimitStyle" parent="TextAppearance.AppCompat.Small">
-        <!-- Customiza os camoos de TextInputLayout-->
-    <item name="android:textColor">@color/colorTextImput</item>
-    <item name="android:textStyle">bold</item>
-    <item name="android:textSize">18sp</item>
+        <!-- Customiza os campos de TextInputLayout-->
+    <item name="android:textColor">@color/colorTextInput</item>
     </style>
 
 </resources>

@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,6 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import br.ufg.com.dedoduro.R;
 import br.ufg.com.dedoduro.model.HomeActivity;
@@ -72,12 +77,16 @@ public class LoginActivity extends AppCompatActivity {
         EditText editTextPassword = (EditText) findViewById(R.id.input_password);
 
         if (!"".equals(editTextEmail.getText().toString())) {
-            if (!"".equals(editTextPassword.getText().toString())) {
-                showLoading();
-                performLogin(editTextEmail.getText().toString(),
-                        editTextPassword.getText().toString());
+            if (VerifyDataInput.validarEmail(editTextEmail.getText().toString())) {
+                if (!"".equals(editTextPassword.getText().toString())) {
+                        showLoading();
+                        performLogin(editTextEmail.getText().toString(),
+                                editTextPassword.getText().toString());
+                } else {
+                    editTextPassword.setError("Preencha o campo senha");
+                }
             } else {
-                editTextPassword.setError("Preencha o campo senha");
+                editTextEmail.setError("Email inválido");
             }
         } else {
             editTextEmail.setError("Preencha o campo email");
