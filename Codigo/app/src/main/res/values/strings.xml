@@ -26,4 +26,5 @@
     <string name="nome">Nome da Obra</string>
     <string name="botaoRegistrar">Registrar</string>
     <string name="hintPoncento">0%</string>
+    <string name="progressDialogUpload">Carregando imagem...</string>
 </resources>
