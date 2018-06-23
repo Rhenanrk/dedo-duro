@@ -16,15 +16,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import br.ufg.com.dedoduro.R;
 import br.ufg.com.dedoduro.model.HomeActivity;
-import br.ufg.com.dedoduro.web.Connection;
+import br.ufg.com.dedoduro.connection.Connection;
+import br.ufg.com.dedoduro.model.UserDTO;
 
 public class RegisterActivity extends AppCompatActivity {
 
     MaterialDialog dialog;
     private FirebaseAuth auth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle saveInstanveState) {
@@ -32,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_user);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.register_toolbar);
         setSupportActionBar(myToolbar);
+
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -99,13 +105,23 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             alert("Sucesso ao registrar");
+                            performRegisterInFirebase();
                             Intent intentHome = new Intent(RegisterActivity.this, HomeActivity.class);
                             startActivity(intentHome);
                             finish();
                         } else {
                             alert("Erro ao cadastrar");
+                            hideLoading();
                         }
+                    }
 
+                    private void performRegisterInFirebase() {
+                        mDatabase = FirebaseDatabase.getInstance().getReference();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        String userEmail = user.getEmail();
+                        String userUid = user.getUid();
+                        UserDTO userDTO = new UserDTO(userEmail, userUid);
+                        mDatabase.child("users").child(userUid).setValue(userDTO);
                     }
                 });
     }
@@ -121,5 +137,12 @@ public class RegisterActivity extends AppCompatActivity {
                 .progress(true, 0)
                 .cancelable(false)
                 .show();
+    }
+
+    private void hideLoading(){
+        if(dialog != null && dialog.isShowing()){
+            dialog.hide();
+            dialog = null;
+        }
     }
 }

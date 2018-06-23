@@ -6,7 +6,8 @@
     <string name="erroDeConecao">Você não tem conexão.</string>
     <string name="textoAguarde">Aguarde</string>
     <string name="textoLogin">LOGIN</string>
-    <string name="textoRegistrarNovoUsuario"><u>Não possui uma conta? Registre-se!</u>.</string>
+    <string name="textoRegistrarNovoUsuario"><u>Não possui uma conta? Registre-se!</u></string>
+    <string name="tituloTelaRegistro">Registro de Usuário</string>
     <string name="tituloTelaHome">Obras Paralizadas</string>
     <string name="botaoNovaObra">Nova Obra</string>
     <string name="contentDescriptionNome_obra">Nome da obra</string>
@@ -19,7 +20,7 @@
     <string name="progressoObra">Defina o progresso aproximado da obra</string>
     <string name="descricaoObra">Descrição</string>
     <string name="selecioneData">Selecione</string>
-    <string name="finalObra">Finalização da Obra</string>
+    <string name="finalObra">Conclusão da Obra</string>
     <string name="inicioObra">Inicio da Obra</string>
     <string name="local">Localização</string>
     <string name="nome">Nome da Obra</string>

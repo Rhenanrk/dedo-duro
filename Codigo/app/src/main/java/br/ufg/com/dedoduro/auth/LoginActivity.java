@@ -24,7 +24,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import br.ufg.com.dedoduro.R;
 import br.ufg.com.dedoduro.model.HomeActivity;
-import br.ufg.com.dedoduro.web.Connection;
+import br.ufg.com.dedoduro.connection.Connection;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -76,9 +76,9 @@ public class LoginActivity extends AppCompatActivity {
         if (!"".equals(editTextEmail.getText().toString())) {
             if (VerifyDataInput.validarEmail(editTextEmail.getText().toString())) {
                 if (!"".equals(editTextPassword.getText().toString())) {
-                        showLoading();
-                        performLogin(editTextEmail.getText().toString(),
-                                editTextPassword.getText().toString());
+                    showLoading();
+                    performLogin(editTextEmail.getText().toString(),
+                            editTextPassword.getText().toString());
                 } else {
                     editTextPassword.setError("Preencha o campo senha");
                 }

@@ -1,4 +1,4 @@
-package br.ufg.com.dedoduro.web;
+package br.ufg.com.dedoduro.connection;
 
 import android.support.annotation.NonNull;
 

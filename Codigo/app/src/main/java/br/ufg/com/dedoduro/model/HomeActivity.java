@@ -6,17 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 
 import br.ufg.com.dedoduro.R;
 import br.ufg.com.dedoduro.auth.LoginActivity;
-import br.ufg.com.dedoduro.auth.RegisterActivity;
-import br.ufg.com.dedoduro.web.Connection;
+import br.ufg.com.dedoduro.connection.Connection;
 
 public class HomeActivity extends AppCompatActivity {
 

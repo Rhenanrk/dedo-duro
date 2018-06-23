@@ -1,6 +1,6 @@
 package br.ufg.com.dedoduro.model;
 
-public class ObraDTO {
+public class ObraFullDTO {
     String idObra;
     String idUser;
     String imageURL;
@@ -11,13 +11,13 @@ public class ObraDTO {
     String descricao;
     String porcentagemDeConclusao;
 
-    public ObraDTO() {
+    public ObraFullDTO() {
 
     }
 
-    public ObraDTO(String idObra, String idUser, String imageURL, String nome, String local,
-                   String inicioObra, String previsaoDeConclusao, String descricao,
-                   String porcentagemDeConclusao) {
+    public ObraFullDTO(String idObra, String idUser, String imageURL, String nome, String local,
+                       String inicioObra, String previsaoDeConclusao, String descricao,
+                       String porcentagemDeConclusao) {
         this.idObra = idObra;
         this.idUser = idUser;
         this.imageURL = imageURL;

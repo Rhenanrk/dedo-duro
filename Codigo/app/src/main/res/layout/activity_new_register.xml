@@ -176,7 +176,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout_local_obra">
 
             <TextView
-                android:id="@+id/textViewData_inicio"
+                android:id="@+id/textViewSelecioneData_inicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -185,15 +185,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayout_local_obra" />
 
             <TextView
+                android:id="@+id/textViewData_inicio"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/selecioneData" />
         </android.support.design.widget.TextInputLayout>
 
-        <!--data prevista para fim da obra-->
+        <!--data prevista para conclusão da obra-->
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutData_fim"
+            android:id="@+id/textInputLayoutData_conclusao"
             android:layout_width="150dp"
             android:layout_height="55dp"
             android:layout_marginEnd="8dp"
@@ -205,13 +206,14 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout_local_obra">
 
             <TextView
+                android:id="@+id/textViewSelecioneData_fim"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/finalObra" />
 
             <TextView
-                android:id="@+id/textViewData_fim"
+                android:id="@+id/textViewData_conclusao"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
