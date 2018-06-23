@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,54 +9,142 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".model.NewRegisterActivity">
 
+        <!--Imagens dos ícones laterais-->
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/contentDescriptionNome_obra"
+            android:src="@drawable/ic_edit_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout_nome_obra"
+            app:layout_constraintEnd_toStartOf="@+id/textInputLayout_nome_obra"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout_nome_obra" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/contentDescriptionLocalizacao_obra"
+            android:src="@drawable/ic_add_location_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayout_local_obra"
+            app:layout_constraintEnd_toStartOf="@+id/textInputLayout_local_obra"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayout_local_obra" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/contentDescriptionDatas_obra"
+            android:src="@drawable/ic_date_range_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutData_inicio"
+            app:layout_constraintEnd_toStartOf="@+id/textInputLayoutData_inicio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayoutData_inicio" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/contentDescriptionDescricao_obra"
+            android:src="@drawable/ic_edit_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textInputLayoutDescricao_obra"
+            app:layout_constraintEnd_toStartOf="@+id/textInputLayoutDescricao_obra"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textInputLayoutDescricao_obra" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/contentDescriptionPoncentagem_execucao"
+            android:src="@drawable/ic_hourglass_empty_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutProgresso_obra"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayoutProgresso_obra"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linearLayoutProgresso_obra" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:contentDescription="@string/fotoObra"
+            android:src="@drawable/ic_add_a_photo_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayoutImagem"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayoutImagem"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/linearLayoutImagem">
+
+        </ImageView>
 
         <!--toolBar-->
         <android.support.v7.widget.Toolbar
-            android:id="@+id/new_register_toolbar"
+            android:id="@+id/toolbarNew_register"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ToolbarStyle"
-            app:title="@string/title_nova_obra"
+            app:title="@string/botaoNovaObra"
             app:titleTextColor="@color/colorWhite" />
 
         <!--nome da obra-->
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_layout_nome_obra"
-            android:layout_width="match_parent"
+            android:id="@+id/textInputLayout_nome_obra"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
             app:counterEnabled="true"
             app:counterMaxLength="30"
             app:counterTextAppearance="@style/TextLimitStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/new_register_toolbar">
+            app:layout_constraintTop_toBottomOf="@+id/toolbarNew_register">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/obra_name"
+                android:id="@+id/textInput_nome_obra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:hint="Nome da Obra"
+                android:hint="@string/nome"
                 android:maxLength="30"
                 android:textSize="16sp" />
         </android.support.design.widget.TextInputLayout>
 
         <!--localização da obra-->
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_layout_local_obra"
+            android:id="@+id/textInputLayout_local_obra"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="8dp"
             app:counterEnabled="true"
             app:counterMaxLength="40"
@@ -63,71 +152,163 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_nome_obra">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout_nome_obra">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/obra_location"
+                android:id="@+id/textInputLocal_obra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:hint="Localização"
+                android:hint="@string/local"
                 android:maxLength="40"
                 android:textSize="16sp" />
         </android.support.design.widget.TextInputLayout>
 
         <!--data inicial da obra-->
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_data_inicio"
-            android:layout_width="194dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="8dp"
+            android:id="@+id/textInputLayoutData_inicio"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="8dp"
             app:counterTextAppearance="@style/TextLimitStyle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_local_obra">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout_local_obra">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textViewData_inicio"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Inicio da Obra" />
-
-            <TextView
-                android:id="@+id/text_view_data_inicio"
-                android:layout_width="94dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:hint="Selecione"
+                android:gravity="center"
+                android:text="@string/inicioObra"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_input_layout_local_obra" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout_local_obra" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/selecioneData" />
         </android.support.design.widget.TextInputLayout>
 
-        <!--data prevista para fim da aobra-->
+        <!--data prevista para fim da obra-->
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_data_fim"
-            android:layout_width="191dp"
-            android:layout_height="59dp"
+            android:id="@+id/textInputLayoutData_fim"
+            android:layout_width="150dp"
+            android:layout_height="55dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:counterTextAppearance="@style/TextLimitStyle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_layout_local_obra">
+            app:layout_constraintStart_toEndOf="@+id/textInputLayoutData_inicio"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout_local_obra">
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/finalObra" />
+
+            <TextView
+                android:id="@+id/textViewData_fim"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/selecioneData"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout_local_obra" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--descrição da obra-->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textInputLayoutDescricao_obra"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="350"
+            app:counterTextAppearance="@style/TextLimitStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutData_inicio">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/textInputDescricao_obra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:hint="@string/descricaoObra"
+                android:maxLength="350"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!--porcentagem de execução da obra-->
+        <LinearLayout
+            android:id="@+id/linearLayoutProgresso_obra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent='true'
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutDescricao_obra">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/progressoObra" />
+
+            <com.xw.repo.BubbleSeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:bsb_max="100"
+                app:bsb_min="0"
+                app:bsb_progress="0"
+                app:bsb_section_count="10"
+                app:bsb_section_text_position="bottom_sides"
+                app:bsb_show_progress_in_float="false"
+                app:bsb_show_section_mark="true"
+                app:bsb_show_section_text="true"
+                app:bsb_touch_to_seek="true" />
+
+            <TextView
+                android:id="@+id/textViewProgresso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fim Previsto da Obra" />
+                android:layout_gravity="center">
+            </TextView>
+        </LinearLayout>
+
+        <!--adicionando foto da obra-->
+        <LinearLayout
+            android:id="@+id/linearLayoutImagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent='true'
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutProgresso_obra">
 
             <TextView
-                android:id="@+id/text_view_data_fim"
-                android:layout_width="94dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:hint="Selecione"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_input_layout_local_obra" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center"
+                android:text="@string/fotoObra" />
+
+        </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

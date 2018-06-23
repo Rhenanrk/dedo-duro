@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 
 import br.ufg.com.dedoduro.R;
+import br.ufg.com.dedoduro.auth.LoginActivity;
 import br.ufg.com.dedoduro.auth.RegisterActivity;
 import br.ufg.com.dedoduro.web.Connection;
 
@@ -32,10 +33,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
        getMenuInflater().inflate(R.menu.home_menu, menu);
        return true;
@@ -46,6 +43,8 @@ public class HomeActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_sign_out:
                 Connection.logOut();
+                Intent openLogin = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(openLogin);
                 finish();
                 return true;
             default:

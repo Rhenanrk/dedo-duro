@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorWhite">
 
+        <!--Logo do aplicativo-->
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="124dp"
@@ -21,10 +22,10 @@
             android:src="@drawable/logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/contentDescritionLogo" />
 
-
-        <!--campo de email-->
+        <!--Campo de email-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/usernameWrapper"
             android:layout_width="match_parent"
@@ -44,7 +45,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="16dp"
-                android:hint="@string/hint_email"
+                android:hint="@string/hintEmail"
                 android:inputType="textEmailAddress"
                 android:drawableEnd="@drawable/ic_person_24dp"
                 app:layout_constraintHorizontal_bias="0.49"
@@ -53,7 +54,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
         </android.support.design.widget.TextInputLayout>
 
-        <!--campo de senha-->
+        <!--Campo de senha-->
         <android.support.design.widget.TextInputLayout
             android:id="@+id/passwordWrapper"
             android:layout_width="match_parent"
@@ -74,7 +75,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="@string/hint_password"
+                android:hint="@string/botaoSenha"
                 android:inputType="textPassword"
                 android:drawableEnd="@drawable/ic_lock_24dp"
                 app:layout_constraintHorizontal_bias="0.49"
@@ -83,7 +84,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/usernameWrapper" />
         </android.support.design.widget.TextInputLayout>
 
-        <!--botão de login-->
+        <!--Botão de login-->
         <Button
             android:id="@+id/button_login"
             android:layout_width="340dp"
@@ -93,24 +94,24 @@
             android:layout_marginTop="8dp"
             android:background="@color/colorPrimary"
             android:gravity="center"
-            android:text="@string/label_enter"
+            android:text="@string/botaoEntrar"
             android:textColor="@android:color/white"
             app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordWrapper" />
 
-        <!--texto para cadastrar novo usuário-->
+        <!--Cadastrar novo usuário-->
         <TextView
             android:id="@+id/textView_registre-se"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:foregroundGravity="center"
             android:gravity="center"
-            android:text="@string/registre_se"
+            android:text="@string/textoRegistrarNovoUsuario"
             android:textColor="@color/colorLightGrey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

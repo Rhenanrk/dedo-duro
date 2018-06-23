@@ -17,9 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import br.ufg.com.dedoduro.R;
 import br.ufg.com.dedoduro.model.HomeActivity;
 import br.ufg.com.dedoduro.web.Connection;
@@ -107,7 +104,6 @@ public class RegisterActivity extends AppCompatActivity {
                             finish();
                         } else {
                             alert("Erro ao cadastrar");
-                            finish();
                         }
 
                     }
@@ -121,7 +117,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void showLoading() {
         dialog = new MaterialDialog.Builder(this)
-                .content(R.string.label_wait)
+                .content(R.string.textoAguarde)
                 .progress(true, 0)
                 .cancelable(false)
                 .show();

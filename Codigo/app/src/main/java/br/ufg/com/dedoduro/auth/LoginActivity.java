@@ -22,9 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import br.ufg.com.dedoduro.R;
 import br.ufg.com.dedoduro.model.HomeActivity;
 import br.ufg.com.dedoduro.web.Connection;
@@ -100,15 +97,15 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Intent intentLogin = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivity(intentLogin);
                             hideLoading();
+                            startActivity(intentLogin);
+                            finish();
                         } else {
                             hideLoading();
                             alert("Erro ao relaizar login");
                         }
                     }
                 });
-
     }
 
     private void setupRegister() {
@@ -140,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoading() {
         dialog = new MaterialDialog.Builder(this)
-                .content(R.string.label_wait)
+                .content(R.string.textoAguarde)
                 .progress(true, 0)
                 .cancelable(false)
                 .show();
