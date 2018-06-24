@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -73,7 +74,6 @@ public class NewRegisterActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-
         setupImageUpload();
         setupDataInicioObra();
         setupDataFinalObra();
@@ -119,7 +119,7 @@ public class NewRegisterActivity extends AppCompatActivity {
             progressDialog.show();
 
             String nomeImagemObra = randomString;
-            StorageReference riversRef = mStorageReference.child("images/" + nomeImagemObra + ".jpg");
+            final StorageReference riversRef = mStorageReference.child("images/" + nomeImagemObra + ".jpg");
 
             riversRef.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -194,11 +194,11 @@ public class NewRegisterActivity extends AppCompatActivity {
         //Captura progresso da obra
         TextView textViewProgresso = (TextView) findViewById(R.id.textViewProgresso);
 
-        //COnstroi link da imagem
-        String urlImagemObra = "images/" + idObra + ".jpg";
+        //Constroi path da imagem
+        String pathImagemObra = "images/" + idObra + ".jpg";
 
         //Chama método que grava dados no banco
-        persistData(idObra, idUser, urlImagemObra, textInputEditTextNomeObra.getText().toString(),
+        persistData(idObra, idUser, pathImagemObra, textInputEditTextNomeObra.getText().toString(),
                 textInputEditTextLocalObra.getText().toString(), textViewDataInicio.getText().toString(),
                 textViewDataConclusao.getText().toString(), textInputEditTextDescricao.getText().toString(),
                 textViewProgresso.getText().toString());
@@ -208,11 +208,14 @@ public class NewRegisterActivity extends AppCompatActivity {
     private void persistData(String idObra, String idUser, String imageURL, String nome, String local,
                              String inicioObra, String previsaoDeConclusao,
                              String descricao, String porcentagemDeConclusao) {
+
         //Criando objeto ObraFullDTO
         ObraFullDTO obraFullDTO = new ObraFullDTO(idObra, idUser, imageURL, nome, local, inicioObra, previsaoDeConclusao,
                 descricao, porcentagemDeConclusao);
-        //Criando objeto ObraFullDTO
+
+        //Criando objeto ObraLiteDTO
         ObraLiteDTO obraLiteDTO = new ObraLiteDTO(idObra, nome, local);
+
         //Persiste no Firebase
         mDatabase.child("obrasFull").child(idObra).setValue(obraFullDTO);
         mDatabase.child("obrasLite").child(idObra).setValue(obraLiteDTO);
