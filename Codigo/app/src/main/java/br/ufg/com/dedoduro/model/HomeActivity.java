@@ -2,6 +2,7 @@ package br.ufg.com.dedoduro.model;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,8 +24,10 @@ import br.ufg.com.dedoduro.connection.Connection;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerViewObras;
+    private RecyclerView recycler;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,49 +37,34 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.home_toolbar);
         setSupportActionBar(myToolbar);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("obrasLite");
-        mDatabase.keepSynced(true);
-
-        recyclerViewObras = (RecyclerView) findViewById(R.id.reciclerViewObras);
-        recyclerViewObras.setHasFixedSize(true);
-        recyclerViewObras.setLayoutManager(new LinearLayoutManager(this));
-
+        setupRecyclerView();
         registerNew();
+    }
+
+    private void setupRecyclerView() {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("obrasLite");
+
+        recycler = (RecyclerView) findViewById(R.id.reciclerViewObras);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
+
+        FirebaseRecyclerAdapter<ObraLiteDTO, UserViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ObraLiteDTO, UserViewHolder>(
+                ObraLiteDTO.class,
+                R.layout.row_obra,
+                UserViewHolder.class,
+                mDatabase
+        ) {
+            @Override
+            protected void populateViewHolder(final UserViewHolder holder, ObraLiteDTO model, int position) {
+                holder.txtNome.setText(model.nome);
+                holder.txtLocal.setText(model.local);
+            }
+        };
+        recycler.setAdapter(firebaseRecyclerAdapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseRecyclerAdapter<ObraLiteDTO, ObraLiteViewHolder> firebaseRecyclerAdapter =
-                new FirebaseRecyclerAdapter<ObraLiteDTO, ObraLiteViewHolder>(ObraLiteDTO.class,
-                        R.layout.row_obra, ObraLiteViewHolder.class, mDatabase) {
-                    @Override
-                    protected void populateViewHolder(ObraLiteViewHolder viewHolder, ObraLiteDTO model, int position) {
-                        viewHolder.setNomeObra(model.getNome());
-                        viewHolder.setLocalObra(model.getLocal());
-                    }
-                };
-        recyclerViewObras.setAdapter(firebaseRecyclerAdapter);
-
-    }
-
-    public static class ObraLiteViewHolder extends RecyclerView.ViewHolder {
-        View mView;
-
-        public ObraLiteViewHolder(View itemView) {
-            super(itemView);
-            mView = itemView;
-        }
-
-        public void setNomeObra(String nome) {
-            TextView textViewNomeObra = (TextView) mView.findViewById(R.id.textViewRowNome_obra);
-            textViewNomeObra.setText(nome);
-        }
-
-        public void setLocalObra(String local) {
-            TextView textViewLocalObra = (TextView) mView.findViewById(R.id.textViewRowLocal_obra);
-            textViewLocalObra.setText(local);
-        }
     }
 
     @Override
@@ -109,5 +98,16 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intentRegisterNew);
             }
         });
+    }
+
+    public static class UserViewHolder extends RecyclerView.ViewHolder {
+        TextView txtNome;
+        TextView txtLocal;
+
+        public UserViewHolder(View itemView) {
+            super(itemView);
+            txtNome = (TextView) itemView.findViewById(R.id.textViewRowNome_obra);
+            txtLocal = (TextView) itemView.findViewById(R.id.textViewRowLocal_obra);
+        }
     }
 }
