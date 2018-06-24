@@ -6,7 +6,7 @@
     <string name="erroDeConecao">Você não tem conexão.</string>
     <string name="textoAguarde">Aguarde</string>
     <string name="textoLogin">LOGIN</string>
-    <string name="textoRegistrarNovoUsuario"><u>Não possui uma conta? Registre-se!</u></string>
+    <string name="textoRegistrarNovoUsuario">Registre-se</string>
     <string name="tituloTelaRegistro">Registro de Usuário</string>
     <string name="tituloTelaHome">Obras Paralizadas</string>
     <string name="botaoNovaObra">Nova Obra</string>

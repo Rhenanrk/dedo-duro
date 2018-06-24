@@ -109,10 +109,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setupRegister() {
-        TextView textRegister =
-                (TextView) findViewById(R.id.textView_registre_se);
+        Button buttonRegister = (Button) findViewById(R.id.button_register);
 
-        textRegister.setOnClickListener(new View.OnClickListener() {
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentRegister = new Intent(getApplicationContext(), RegisterActivity.class);
