@@ -8,11 +8,11 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,8 +41,6 @@ import java.util.UUID;
 
 import br.ufg.com.dedoduro.R;
 
-import static java.lang.String.format;
-
 public class NewRegisterActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
@@ -53,6 +51,8 @@ public class NewRegisterActivity extends AppCompatActivity {
     private TextView mDisplayDateConclusao;
     private ImageView imageViewImagemObra;
     private Uri filePath;
+    private Task<Uri> Url;
+    private String link;
     private DatePickerDialog.OnDateSetListener mDateSetListenerInicio;
     private DatePickerDialog.OnDateSetListener mDateSetListenerFim;
 
@@ -78,73 +78,6 @@ public class NewRegisterActivity extends AppCompatActivity {
         setupDataInicioObra();
         setupDataFinalObra();
         setupProgressoObra();
-    }
-
-    private void setupImageUpload() {
-        TextView textViewImagemObra = (TextView) findViewById(R.id.textViewUpload_imagem);
-        textViewImagemObra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showFileChooser();
-            }
-        });
-    }
-
-    private void showFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Selecione uma imagem"), PICK_IMAGE_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            filePath = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                imageViewImagemObra = (ImageView) findViewById(R.id.imageViewImagem_obra);
-                imageViewImagemObra.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void uploadFile() {
-        if (filePath != null) {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle(getString(R.string.progressDialogUpload));
-            progressDialog.show();
-
-            String nomeImagemObra = randomString;
-            final StorageReference riversRef = mStorageReference.child("images/" + nomeImagemObra + ".jpg");
-
-            riversRef.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            progressDialog.dismiss();
-                            alert("Imagem carregada com sucesso");
-                            readData();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            progressDialog.dismiss();
-                            alert("Erro ao carregar imagem");
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progresso = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                            progressDialog.setMessage(((int) progresso) + "% concluido...");
-                        }
-                    });
-        } else alert("Selecione uma imagem");
     }
 
     @Override
@@ -197,32 +130,81 @@ public class NewRegisterActivity extends AppCompatActivity {
         //Constroi path da imagem
         String pathImagemObra = "images/" + idObra + ".jpg";
 
+
         //Chama método que grava dados no banco
-        persistData(idObra, idUser, pathImagemObra, textInputEditTextNomeObra.getText().toString(),
+        persistData(idObra, idUser, link, textInputEditTextNomeObra.getText().toString(),
                 textInputEditTextLocalObra.getText().toString(), textViewDataInicio.getText().toString(),
                 textViewDataConclusao.getText().toString(), textInputEditTextDescricao.getText().toString(),
                 textViewProgresso.getText().toString());
 
     }
 
-    private void persistData(String idObra, String idUser, String imageURL, String nome, String local,
-                             String inicioObra, String previsaoDeConclusao,
-                             String descricao, String porcentagemDeConclusao) {
+    private void setupImageUpload() {
+        TextView textViewImagemObra = (TextView) findViewById(R.id.textViewUpload_imagem);
+        textViewImagemObra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showFileChooser();
+            }
+        });
+    }
 
-        //Criando objeto ObraFullDTO
-        ObraFullDTO obraFullDTO = new ObraFullDTO(idObra, idUser, imageURL, nome, local, inicioObra, previsaoDeConclusao,
-                descricao, porcentagemDeConclusao);
+    private void showFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Selecione uma imagem"), PICK_IMAGE_REQUEST);
+    }
 
-        //Criando objeto ObraLiteDTO
-        ObraLiteDTO obraLiteDTO = new ObraLiteDTO(idObra, nome, local);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            filePath = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                imageViewImagemObra = (ImageView) findViewById(R.id.imageViewImagem_obra);
+                imageViewImagemObra.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-        //Persiste no Firebase
-        mDatabase.child("obrasFull").child(idObra).setValue(obraFullDTO);
-        mDatabase.child("obrasLite").child(idObra).setValue(obraLiteDTO);
-        alert("Nova obra cadastrada");
-        Intent intentHome = new Intent(NewRegisterActivity.this, HomeActivity.class);
-        startActivity(intentHome);
-        finish();
+    private void uploadFile() {
+        if (filePath != null) {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle(getString(R.string.progressDialogUpload));
+            progressDialog.show();
+
+            String nomeImagemObra = randomString;
+            final StorageReference riversRef = mStorageReference.child("images/" + nomeImagemObra + ".jpg");
+
+            riversRef.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Url = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                            link = Url.toString();
+                            progressDialog.dismiss();
+                            readData();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            progressDialog.dismiss();
+                            alert("Erro ao carregar imagem");
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progresso = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                            progressDialog.setMessage(((int) progresso) + "% concluido...");
+                        }
+                    });
+        } else alert("Selecione uma imagem");
     }
 
     private void setupProgressoObra() {
@@ -309,5 +291,25 @@ public class NewRegisterActivity extends AppCompatActivity {
     private void alert(String msg) {
         Toast.makeText(NewRegisterActivity.this, msg, Toast.LENGTH_SHORT)
                 .show();
+    }
+
+    private void persistData(String idObra, String idUser, String link, String nome, String local,
+                             String inicioObra, String previsaoDeConclusao,
+                             String descricao, String porcentagemDeConclusao) {
+
+        //Criando objeto ObraFullDTO
+        ObraFullDTO obraFullDTO = new ObraFullDTO(idObra, idUser, link, nome, local, inicioObra, previsaoDeConclusao,
+                descricao, porcentagemDeConclusao);
+
+        //Criando objeto ObraLiteDTO
+        ObraLiteDTO obraLiteDTO = new ObraLiteDTO(idObra, nome, local);
+
+        //Persiste no Firebase
+        mDatabase.child("obrasFull").child(idObra).setValue(obraFullDTO);
+        mDatabase.child("obrasLite").child(idObra).setValue(obraLiteDTO);
+        alert("Nova obra cadastrada");
+        Intent intentHome = new Intent(NewRegisterActivity.this, HomeActivity.class);
+        startActivity(intentHome);
+        finish();
     }
 }
