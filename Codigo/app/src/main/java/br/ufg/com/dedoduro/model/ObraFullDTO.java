@@ -33,4 +33,75 @@ public class ObraFullDTO {
         this.porcentagemDeConclusao = porcentagemDeConclusao;
     }
 
+    public String getIdObra() {
+        return idObra;
+    }
+
+    public void setIdObra(String idObra) {
+        this.idObra = idObra;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public String getInicioObra() {
+        return inicioObra;
+    }
+
+    public void setInicioObra(String inicioObra) {
+        this.inicioObra = inicioObra;
+    }
+
+    public String getPrevisaoDeConclusao() {
+        return previsaoDeConclusao;
+    }
+
+    public void setPrevisaoDeConclusao(String previsaoDeConclusao) {
+        this.previsaoDeConclusao = previsaoDeConclusao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getPorcentagemDeConclusao() {
+        return porcentagemDeConclusao;
+    }
+
+    public void setPorcentagemDeConclusao(String porcentagemDeConclusao) {
+        this.porcentagemDeConclusao = porcentagemDeConclusao;
+    }
 }

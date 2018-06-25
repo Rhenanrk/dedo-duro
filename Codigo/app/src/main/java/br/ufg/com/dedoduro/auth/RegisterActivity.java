@@ -35,10 +35,12 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanveState) {
         super.onCreate(saveInstanveState);
         setContentView(R.layout.activity_register_user);
+
+        //habilita toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.register_toolbar);
         setSupportActionBar(myToolbar);
 
-
+        //habilita botão de voltar na toolbar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);

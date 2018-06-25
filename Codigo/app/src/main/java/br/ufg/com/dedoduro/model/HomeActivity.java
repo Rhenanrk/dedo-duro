@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,8 +56,20 @@ public class HomeActivity extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(final UserViewHolder holder, ObraLiteDTO model, int position) {
+
+                final String post_key = getRef(position).getKey();
+
                 holder.txtNome.setText(model.nome);
                 holder.txtLocal.setText(model.local);
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intentDescricao = new Intent(HomeActivity.this, DescricaoObraActivity.class);
+                        intentDescricao.putExtra("chave", post_key);
+                        startActivity(intentDescricao);
+                    }
+                });
             }
         };
         recycler.setAdapter(firebaseRecyclerAdapter);

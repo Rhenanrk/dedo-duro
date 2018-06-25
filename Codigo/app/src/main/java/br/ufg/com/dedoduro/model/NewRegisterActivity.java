@@ -37,6 +37,7 @@ import com.xw.repo.BubbleSeekBar;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.UUID;
 
 import br.ufg.com.dedoduro.R;
@@ -45,20 +46,18 @@ public class NewRegisterActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private StorageReference mStorageReference;
-    private static final String TAG = "NewRegisterActivity";
     private static final int PICK_IMAGE_REQUEST = 234;
     private TextView mDisplayDateInicio;
     private TextView mDisplayDateConclusao;
-    private ImageView imageViewImagemObra;
     private Uri filePath;
     private Task<Uri> Url;
     private String link;
     private DatePickerDialog.OnDateSetListener mDateSetListenerInicio;
     private DatePickerDialog.OnDateSetListener mDateSetListenerFim;
 
-    UUID uuid = UUID.randomUUID();
-    String myRandom = uuid.toString();
-    String randomString = myRandom.substring(0, 28);
+    private final UUID uuid = UUID.randomUUID();
+    private final String myRandom = uuid.toString();
+    private final String randomString = myRandom.substring(0, 28);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +65,12 @@ public class NewRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_register);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mStorageReference = FirebaseStorage.getInstance().getReference();
+
+        //habilita toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbarNew_register);
         setSupportActionBar(myToolbar);
 
+        //habilita botão de voltar na toolbar
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -107,6 +109,7 @@ public class NewRegisterActivity extends AppCompatActivity {
         //Captura id do usuário logado
         mDatabase = FirebaseDatabase.getInstance().getReference();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
         String idUser = user.getUid();
 
         //Captura nome da obra
@@ -126,10 +129,6 @@ public class NewRegisterActivity extends AppCompatActivity {
 
         //Captura progresso da obra
         TextView textViewProgresso = (TextView) findViewById(R.id.textViewProgresso);
-
-        //Constroi path da imagem
-        String pathImagemObra = "images/" + idObra + ".jpg";
-
 
         //Chama método que grava dados no banco
         persistData(idObra, idUser, link, textInputEditTextNomeObra.getText().toString(),
@@ -163,7 +162,7 @@ public class NewRegisterActivity extends AppCompatActivity {
             filePath = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                imageViewImagemObra = (ImageView) findViewById(R.id.imageViewImagem_obra);
+                ImageView imageViewImagemObra = (ImageView) findViewById(R.id.imageViewImagem_obra);
                 imageViewImagemObra.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -212,10 +211,10 @@ public class NewRegisterActivity extends AppCompatActivity {
         final TextView textView = (TextView) findViewById(R.id.textViewProgresso);
 
         bubbleSeekBar.setOnProgressChangedListener(new BubbleSeekBar.OnProgressChangedListener() {
-            @SuppressLint("DefaultLocale")
+            @SuppressLint({"DefaultLocale", "SetTextI18n"})
             @Override
             public void onProgressChanged(int progress, float progressFloat) {
-                textView.setText(String.format(progress + "%% concluído"));
+                textView.setText(progress + getString(R.string.dialogLoadImage));
             }
 
             @Override
@@ -245,7 +244,7 @@ public class NewRegisterActivity extends AppCompatActivity {
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListenerInicio,
                         year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
         });

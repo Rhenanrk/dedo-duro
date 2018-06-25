@@ -22,6 +22,7 @@
         <activity android:name=".auth.RegisterActivity" />
         <activity android:name=".model.HomeActivity" />
         <activity android:name=".model.NewRegisterActivity" />
+        <activity android:name=".model.DescricaoObraActivity"></activity>
     </application>
 
 </manifest>

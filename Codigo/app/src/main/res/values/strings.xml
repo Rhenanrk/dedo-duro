@@ -9,6 +9,7 @@
     <string name="textoRegistrarNovoUsuario">Registre-se</string>
     <string name="tituloTelaRegistro">Registro de Usuário</string>
     <string name="tituloTelaHome">Obras Paralizadas</string>
+    <string name="tituloTelaDescricao">Descrição</string>
     <string name="botaoNovaObra">Nova Obra</string>
     <string name="contentDescriptionNome_obra">Nome da obra</string>
     <string name="contentDescriptionLocalizacao_obra">Localização da obra</string>
@@ -18,7 +19,6 @@
     <string name="contentDescritionLogo">Logo do aplicativo: dedo apontando para cima</string>
     <string name="fotoObra">Adicione uma foto atual da obra</string>
     <string name="progressoObra">Defina o progresso aproximado da obra</string>
-    <string name="descricaoObra">Descrição</string>
     <string name="selecioneData">Selecione</string>
     <string name="finalObra">Conclusão da Obra</string>
     <string name="inicioObra">Inicio da Obra</string>
@@ -27,4 +27,6 @@
     <string name="botaoRegistrar">Registrar</string>
     <string name="hintPoncento">0%</string>
     <string name="progressDialogUpload">Carregando imagem...</string>
+    <string name="dialogLoadImage">% concluído</string>
+    <string name="contentDescriptionMiniatura">Miniatura da imagem da obra</string>
 </resources>
