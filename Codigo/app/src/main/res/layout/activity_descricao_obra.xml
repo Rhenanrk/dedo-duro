@@ -19,7 +19,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <TextView
-        android:id="@+id/textViewDescricaoNome_Obra"
+        android:id="@+id/textViewEdicaoNome_Obra"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/home_toolbar" />
 
     <TextView
-        android:id="@+id/textViewDescricaoLocal_obra"
+        android:id="@+id/textViewEdicaoLocal_obra"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -42,7 +42,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescricaoNome_Obra" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEdicaoNome_Obra" />
 
     <View
         android:id="@+id/divider"
@@ -54,20 +54,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescricaoLocal_obra" />
-
-    <TextView
-        android:id="@+id/textViewDescricaoTituloDescricao_obra"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Descrição"
-        android:textColor="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEdicaoLocal_obra" />
 
     <TextView
         android:id="@+id/textViewDescricaoDescricao_obra"
@@ -76,10 +63,11 @@
         android:layout_marginEnd="8dp"
         android:textColor="@color/colorLightGrey"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDescricaoTituloDescricao_obra" />
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <TextView
         android:id="@+id/textViewDescricaoTituloData_inicio"

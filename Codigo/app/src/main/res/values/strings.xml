@@ -10,7 +10,8 @@
     <string name="tituloTelaRegistro">Registro de Usuário</string>
     <string name="tituloTelaHome">Obras Paralizadas</string>
     <string name="tituloTelaDescricao">Descrição</string>
-    <string name="botaoNovaObra">Nova Obra</string>
+    <string name="tituloTelaNovaObra">Nova Obra</string>
+    <string name="tituloTelaEditarObra">Editar</string>
     <string name="contentDescriptionNome_obra">Nome da obra</string>
     <string name="contentDescriptionLocalizacao_obra">Localização da obra</string>
     <string name="contentDescriptionDatas_obra">Datas de início e fim da obra</string>

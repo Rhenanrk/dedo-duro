@@ -67,7 +67,7 @@ public class NewRegisterActivity extends AppCompatActivity {
         mStorageReference = FirebaseStorage.getInstance().getReference();
 
         //habilita toolbar
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbarNew_register);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbarEdit_obra);
         setSupportActionBar(myToolbar);
 
         //habilita botão de voltar na toolbar

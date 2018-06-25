@@ -21,8 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import br.ufg.com.dedoduro.R;
-import br.ufg.com.dedoduro.model.HomeActivity;
 import br.ufg.com.dedoduro.connection.Connection;
+import br.ufg.com.dedoduro.model.HomeActivity;
 import br.ufg.com.dedoduro.model.UserDTO;
 
 public class RegisterActivity extends AppCompatActivity {

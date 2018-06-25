@@ -1,9 +1,9 @@
 package br.ufg.com.dedoduro.model;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,22 +42,20 @@ public class DescricaoObraActivity extends AppCompatActivity {
         chave = intentDescricao.getStringExtra("chave");
 
         //inicializa campos
-        final TextView textViewNome = (TextView) findViewById(R.id.textViewDescricaoNome_Obra);
-        final TextView textViewLocal = (TextView) findViewById(R.id.textViewDescricaoLocal_obra);
+        final TextView textViewNome = (TextView) findViewById(R.id.textViewEdicaoNome_Obra);
+        final TextView textViewLocal = (TextView) findViewById(R.id.textViewEdicaoLocal_obra);
         final TextView textViewDescricao = (TextView) findViewById(R.id.textViewDescricaoDescricao_obra);
         final TextView textViewInicio = (TextView) findViewById(R.id.textViewDescricaoData_inicio);
         final TextView textViewFim = (TextView) findViewById(R.id.textViewDescricaoData_fim);
         final TextView textViewPorcentagem = (TextView) findViewById(R.id.textViewDescricaoPorcentagem);
 
 
-
         //preenche
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("obrasFull").child(chave);
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 ObraFullDTO obraFullDTO = dataSnapshot.getValue(ObraFullDTO.class);
 
                 String nome = obraFullDTO.getNome();
@@ -73,8 +71,6 @@ public class DescricaoObraActivity extends AppCompatActivity {
                 textViewInicio.setText(inicio);
                 textViewFim.setText(fim);
                 textViewPorcentagem.setText(porcentagem);
-
-
             }
 
             @Override
@@ -83,7 +79,6 @@ public class DescricaoObraActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     protected void onStart() {
@@ -100,7 +95,10 @@ public class DescricaoObraActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.Editar:
-                //Editar obra
+                //Chama tela de edição
+                Intent intentEditar = new Intent(DescricaoObraActivity.this, EdicaoObraActivity.class);
+                intentEditar.putExtra("chave", chave);
+                startActivity(intentEditar);
                 return true;
             case R.id.Deletar:
                 //Deletar obra
@@ -112,6 +110,4 @@ public class DescricaoObraActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
 }

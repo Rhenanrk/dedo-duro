@@ -1,19 +1,15 @@
 package br.ufg.com.dedoduro.model;
 
-import android.net.Uri;
-
-import com.google.android.gms.tasks.Task;
-
 public class ObraFullDTO {
-    String idObra;
-    String idUser;
-    String link;
-    String nome;
-    String local;
-    String inicioObra;
-    String previsaoDeConclusao;
-    String descricao;
-    String porcentagemDeConclusao;
+    private String idObra;
+    private String idUser;
+    private String link;
+    private String nome;
+    private String local;
+    private String inicioObra;
+    private String previsaoDeConclusao;
+    private String descricao;
+    private String porcentagemDeConclusao;
 
     public ObraFullDTO() {
 
