@@ -20,6 +20,7 @@ import br.ufg.com.dedoduro.R;
 public class DescricaoObraActivity extends AppCompatActivity {
 
     DatabaseReference mDatabase;
+    DatabaseReference mDelete;
     private String chave;
 
     @Override
@@ -58,14 +59,14 @@ public class DescricaoObraActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ObraFullDTO obraFullDTO = dataSnapshot.getValue(ObraFullDTO.class);
 
-                String nome = obraFullDTO.getNome();
+//                String nome = obraFullDTO.getNome();
                 String local = obraFullDTO.getLocal();
                 String descricao = obraFullDTO.getDescricao();
                 String inicio = obraFullDTO.getInicioObra();
                 String fim = obraFullDTO.getPrevisaoDeConclusao();
                 String porcentagem = obraFullDTO.getPorcentagemDeConclusao();
 
-                textViewNome.setText(nome);
+//                textViewNome.setText(nome);
                 textViewLocal.setText(local);
                 textViewDescricao.setText(descricao);
                 textViewInicio.setText(inicio);
@@ -102,6 +103,11 @@ public class DescricaoObraActivity extends AppCompatActivity {
                 return true;
             case R.id.Deletar:
                 //Deletar obra
+                finish();
+                mDelete = FirebaseDatabase.getInstance().getReference().child("obrasFull").child(chave);
+                mDelete.removeValue();
+                mDelete = FirebaseDatabase.getInstance().getReference().child("obrasLite").child(chave);
+                mDelete.removeValue();
                 return true;
             case android.R.id.home:
                 finish();
