@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
         setupLogin();
         setupRegister();
+        setupForgotPass();
     }
 
     @Override
@@ -93,8 +95,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intentLogin = new Intent(LoginActivity.this, HomeActivity.class);
                             hideLoading();
+                            Intent intentLogin = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intentLogin);
                             finish();
                         } else {
@@ -115,6 +117,20 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intentRegister);
             }
         });
+    }
+
+    private void setupForgotPass() {
+        TextView textViewForgotPass = (TextView) findViewById(R.id.forgotPass);
+
+        textViewForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentForgotPass = new Intent(getApplicationContext(), ForgotPassActivity.class);
+                startActivity(intentForgotPass);
+            }
+        });
+
+
     }
 
     @Subscribe

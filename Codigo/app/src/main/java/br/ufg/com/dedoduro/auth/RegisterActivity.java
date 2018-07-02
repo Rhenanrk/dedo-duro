@@ -106,8 +106,9 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            alert("Sucesso ao registrar");
                             performRegisterInFirebase();
+                            alert("Sucesso ao registrar");
+                            hideLoading();
                             Intent intentHome = new Intent(RegisterActivity.this, HomeActivity.class);
                             startActivity(intentHome);
                             finish();
