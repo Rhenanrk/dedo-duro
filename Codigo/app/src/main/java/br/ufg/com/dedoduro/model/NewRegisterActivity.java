@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -42,6 +43,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 import br.ufg.com.dedoduro.R;
+import br.ufg.com.dedoduro.auth.ForgotPassActivity;
+import br.ufg.com.dedoduro.auth.LoginActivity;
 
 public class NewRegisterActivity extends AppCompatActivity {
 
@@ -98,12 +101,39 @@ public class NewRegisterActivity extends AppCompatActivity {
     }
 
     private void setupReadData() {
-        showLoading();
-        readData();
-        hideLoading();
+        //Captura nome da obra
+        TextInputEditText textInputEditTextNomeObra = (TextInputEditText) findViewById(R.id.textInput_nome_obra);
+
+        //Captura localização da obra
+        TextInputEditText textInputEditTextLocalObra = (TextInputEditText) findViewById(R.id.textInputLocal_obra);
+
+        //Captura descrição da obra
+        TextInputEditText textInputEditTextDescricao = (TextInputEditText) findViewById(R.id.textInputDescricao_obra);
+
+
+        if (!"".equals(textInputEditTextNomeObra.getText().toString())) {
+            if (!"".equals(textInputEditTextLocalObra.getText().toString())) {
+                if (!"".equals(textInputEditTextDescricao.getText().toString())) {
+                    showLoading();
+                    readData(textInputEditTextNomeObra.getText().toString(), textInputEditTextLocalObra.getText().toString(),
+                            textInputEditTextDescricao.getText().toString());
+
+                } else {
+                    textInputEditTextDescricao.setError("A descrição da obra é obrigatória");
+                    hideLoading();
+                }
+            } else {
+                textInputEditTextLocalObra.setError("A localização da obra é obrigatória");
+                hideLoading();
+            }
+        } else {
+            textInputEditTextNomeObra.setError("O nome da obra é obrigatório");
+            hideLoading();
+        }
     }
 
-    private void readData() {
+    private void readData(String textInputEditTextNomeObra, String textInputEditTextLocalObra,
+                          String textInputEditTextDescricao) {
         //Define id do usuário
         String idObra = randomString;
 
@@ -113,28 +143,19 @@ public class NewRegisterActivity extends AppCompatActivity {
         assert user != null;
         String idUser = user.getUid();
 
-        //Captura nome da obra
-        TextInputEditText textInputEditTextNomeObra = (TextInputEditText) findViewById(R.id.textInput_nome_obra);
-
-        //Captura localização da obra
-        TextInputEditText textInputEditTextLocalObra = (TextInputEditText) findViewById(R.id.textInputLocal_obra);
-
         //Captura data inicial da obra
         TextView textViewDataInicio = (TextView) findViewById(R.id.textViewData_inicio);
 
         //Captura data de conclusão da obra
         TextView textViewDataConclusao = (TextView) findViewById(R.id.textViewData_conclusao);
 
-        //Captura descrição da obra
-        TextInputEditText textInputEditTextDescricao = (TextInputEditText) findViewById(R.id.textInputDescricao_obra);
-
         //Captura progresso da obra
         TextView textViewProgresso = (TextView) findViewById(R.id.textViewProgresso);
 
         //Chama método que grava dados no banco
-        persistData(idObra, idUser, textInputEditTextNomeObra.getText().toString(),
-                textInputEditTextLocalObra.getText().toString(), textViewDataInicio.getText().toString(),
-                textViewDataConclusao.getText().toString(), textInputEditTextDescricao.getText().toString(),
+        persistData(idObra, idUser, textInputEditTextNomeObra,
+                textInputEditTextLocalObra, textViewDataInicio.getText().toString(),
+                textViewDataConclusao.getText().toString(), textInputEditTextDescricao,
                 textViewProgresso.getText().toString());
 
     }
@@ -255,6 +276,7 @@ public class NewRegisterActivity extends AppCompatActivity {
         //Persiste no Firebase
         mDatabase.child("obrasFull").child(idObra).setValue(obraFullDTO);
         mDatabase.child("obrasLite").child(idObra).setValue(obraLiteDTO);
+        hideLoading();
         alert("Nova obra cadastrada");
         Intent intentHome = new Intent(NewRegisterActivity.this, HomeActivity.class);
         startActivity(intentHome);
