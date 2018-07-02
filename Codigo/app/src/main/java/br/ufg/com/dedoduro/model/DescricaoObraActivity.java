@@ -52,33 +52,7 @@ public class DescricaoObraActivity extends AppCompatActivity {
 
 
         //preenche
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("obrasFull").child(chave);
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                ObraFullDTO obraFullDTO = dataSnapshot.getValue(ObraFullDTO.class);
-
-//                String nome = obraFullDTO.getNome();
-                String local = obraFullDTO.getLocal();
-                String descricao = obraFullDTO.getDescricao();
-                String inicio = obraFullDTO.getInicioObra();
-                String fim = obraFullDTO.getPrevisaoDeConclusao();
-                String porcentagem = obraFullDTO.getPorcentagemDeConclusao();
-
-//                textViewNome.setText(nome);
-                textViewLocal.setText(local);
-                textViewDescricao.setText(descricao);
-                textViewInicio.setText(inicio);
-                textViewFim.setText(fim);
-                textViewPorcentagem.setText(porcentagem);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        setupDescricao(textViewNome, textViewLocal, textViewDescricao, textViewInicio, textViewFim, textViewPorcentagem);
     }
 
     @Override
@@ -115,5 +89,35 @@ public class DescricaoObraActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void setupDescricao(final TextView textViewNome, final TextView textViewLocal, final TextView textViewDescricao, final TextView textViewInicio, final TextView textViewFim, final TextView textViewPorcentagem) {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("obrasFull").child(chave);
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ObraFullDTO obraFullDTO = dataSnapshot.getValue(ObraFullDTO.class);
+
+                String nome = obraFullDTO != null ? obraFullDTO.getNome() : null;
+                String local = obraFullDTO != null ? obraFullDTO.getLocal() : null;
+                String descricao = obraFullDTO != null ? obraFullDTO.getDescricao() : null;
+                String inicio = obraFullDTO != null ? obraFullDTO.getInicioObra() : null;
+                String fim = obraFullDTO != null ? obraFullDTO.getPrevisaoDeConclusao() : null;
+                String porcentagem = obraFullDTO != null ? obraFullDTO.getPorcentagemDeConclusao() : null;
+
+                textViewNome.setText(nome);
+                textViewLocal.setText(local);
+                textViewDescricao.setText(descricao);
+                textViewInicio.setText(inicio);
+                textViewFim.setText(fim);
+                textViewPorcentagem.setText(porcentagem);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

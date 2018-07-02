@@ -24,7 +24,6 @@ import br.ufg.com.dedoduro.connection.Connection;
 public class HomeActivity extends AppCompatActivity {
 
     private RecyclerView recycler;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
 
 
