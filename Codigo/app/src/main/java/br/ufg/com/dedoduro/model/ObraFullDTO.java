@@ -15,12 +15,11 @@ public class ObraFullDTO {
 
     }
 
-    public ObraFullDTO(String idObra, String idUser, String link, String nome, String local,
+    public ObraFullDTO(String idObra, String idUser, String nome, String local,
                        String inicioObra, String previsaoDeConclusao, String descricao,
                        String porcentagemDeConclusao) {
         this.idObra = idObra;
         this.idUser = idUser;
-        this.link = link;
         this.nome = nome;
         this.local = local;
         this.inicioObra = inicioObra;
@@ -43,14 +42,6 @@ public class ObraFullDTO {
 
     public void setIdUser(String idUser) {
         this.idUser = idUser;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
     }
 
     public String getNome() {

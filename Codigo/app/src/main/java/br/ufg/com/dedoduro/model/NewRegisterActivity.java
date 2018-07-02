@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -45,13 +46,9 @@ import br.ufg.com.dedoduro.R;
 public class NewRegisterActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
-    private StorageReference mStorageReference;
-    private static final int PICK_IMAGE_REQUEST = 234;
+    MaterialDialog dialog;
     private TextView mDisplayDateInicio;
     private TextView mDisplayDateConclusao;
-    private Uri filePath;
-    private Task<Uri> Url;
-    private String link;
     private DatePickerDialog.OnDateSetListener mDateSetListenerInicio;
     private DatePickerDialog.OnDateSetListener mDateSetListenerFim;
 
@@ -64,7 +61,6 @@ public class NewRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_register);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mStorageReference = FirebaseStorage.getInstance().getReference();
 
         //habilita toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbarEdit_obra);
@@ -76,7 +72,6 @@ public class NewRegisterActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        setupImageUpload();
         setupDataInicioObra();
         setupDataFinalObra();
         setupProgressoObra();
@@ -92,7 +87,7 @@ public class NewRegisterActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_confirm:
-                uploadFile();
+                setupReadData();
                 return true;
             case android.R.id.home:
                 finish();
@@ -100,6 +95,12 @@ public class NewRegisterActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void setupReadData() {
+        showLoading();
+        readData();
+        hideLoading();
     }
 
     private void readData() {
@@ -131,80 +132,13 @@ public class NewRegisterActivity extends AppCompatActivity {
         TextView textViewProgresso = (TextView) findViewById(R.id.textViewProgresso);
 
         //Chama método que grava dados no banco
-        persistData(idObra, idUser, link, textInputEditTextNomeObra.getText().toString(),
+        persistData(idObra, idUser, textInputEditTextNomeObra.getText().toString(),
                 textInputEditTextLocalObra.getText().toString(), textViewDataInicio.getText().toString(),
                 textViewDataConclusao.getText().toString(), textInputEditTextDescricao.getText().toString(),
                 textViewProgresso.getText().toString());
 
     }
 
-    private void setupImageUpload() {
-        TextView textViewImagemObra = (TextView) findViewById(R.id.textViewUpload_imagem);
-        textViewImagemObra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showFileChooser();
-            }
-        });
-    }
-
-    private void showFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Selecione uma imagem"), PICK_IMAGE_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            filePath = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                ImageView imageViewImagemObra = (ImageView) findViewById(R.id.imageViewImagem_obra);
-                imageViewImagemObra.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void uploadFile() {
-        if (filePath != null) {
-            final ProgressDialog progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle(getString(R.string.progressDialogUpload));
-            progressDialog.show();
-
-            String nomeImagemObra = randomString;
-            final StorageReference riversRef = mStorageReference.child("images/" + nomeImagemObra + ".jpg");
-
-            riversRef.putFile(filePath)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Url = taskSnapshot.getMetadata().getReference().getDownloadUrl();
-                            link = Url.toString();
-                            progressDialog.dismiss();
-                            readData();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            progressDialog.dismiss();
-                            alert("Erro ao carregar imagem");
-                        }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progresso = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                            progressDialog.setMessage(((int) progresso) + "% concluido...");
-                        }
-                    });
-        } else alert("Selecione uma imagem");
-    }
 
     private void setupProgressoObra() {
         BubbleSeekBar bubbleSeekBar = (BubbleSeekBar) findViewById(R.id.seekBar);
@@ -292,12 +226,27 @@ public class NewRegisterActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void persistData(String idObra, String idUser, String link, String nome, String local,
+    private void showLoading() {
+        dialog = new MaterialDialog.Builder(this)
+                .content(R.string.textoAguarde)
+                .progress(true, 0)
+                .cancelable(false)
+                .show();
+    }
+
+    private void hideLoading() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.hide();
+            dialog = null;
+        }
+    }
+
+    private void persistData(String idObra, String idUser, String nome, String local,
                              String inicioObra, String previsaoDeConclusao,
                              String descricao, String porcentagemDeConclusao) {
 
         //Criando objeto ObraFullDTO
-        ObraFullDTO obraFullDTO = new ObraFullDTO(idObra, idUser, link, nome, local, inicioObra, previsaoDeConclusao,
+        ObraFullDTO obraFullDTO = new ObraFullDTO(idObra, idUser, nome, local, inicioObra, previsaoDeConclusao,
                 descricao, porcentagemDeConclusao);
 
         //Criando objeto ObraLiteDTO
