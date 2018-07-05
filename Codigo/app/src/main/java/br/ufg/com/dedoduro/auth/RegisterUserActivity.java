@@ -25,7 +25,7 @@ import br.ufg.com.dedoduro.connection.Connection;
 import br.ufg.com.dedoduro.model.HomeActivity;
 import br.ufg.com.dedoduro.model.UserDTO;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterUserActivity extends AppCompatActivity {
 
     MaterialDialog dialog;
     private FirebaseAuth auth;
@@ -102,15 +102,13 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void performRegister(String email, String pass) {
         auth.createUserWithEmailAndPassword(email, pass)
-                .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(RegisterUserActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             performRegisterInFirebase();
                             alert("Sucesso ao registrar");
                             hideLoading();
-                            Intent intentHome = new Intent(RegisterActivity.this, HomeActivity.class);
-                            startActivity(intentHome);
                             finish();
                         } else {
                             alert("Erro ao cadastrar");
@@ -130,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void alert(String msg) {
-        Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT)
+        Toast.makeText(RegisterUserActivity.this, msg, Toast.LENGTH_SHORT)
                 .show();
     }
 
@@ -142,8 +140,8 @@ public class RegisterActivity extends AppCompatActivity {
                 .show();
     }
 
-    private void hideLoading(){
-        if(dialog != null && dialog.isShowing()){
+    private void hideLoading() {
+        if (dialog != null && dialog.isShowing()) {
             dialog.hide();
             dialog = null;
         }

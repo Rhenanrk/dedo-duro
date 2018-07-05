@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -104,7 +103,7 @@ public class HomeActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentRegisterNew = new Intent(getApplicationContext(), NewRegisterActivity.class);
+                Intent intentRegisterNew = new Intent(getApplicationContext(), RegisterObraActivity.class);
                 startActivity(intentRegisterNew);
             }
         });
